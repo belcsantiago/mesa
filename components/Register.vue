@@ -3,23 +3,38 @@
     <p>Registro</p>
     <v-form ref="form">
       <v-text-field
-        v-model="email"
+        v-model="userInfo.first_name"
+        :rules="simpleRules"
+        label="Primeiro Nome"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="userInfo.last_name"
+        :rules="simpleRules"
+        label="Sobrenome"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="userInfo.email_user"
+        :rules="emailRules"
         label="E-mail"
         required
       ></v-text-field>
       <v-text-field
-        v-model="user.password"
+        v-model="userInfo.password"
         label="Senha"
+        :rules="simpleRules"
         type="password"
         required
       ></v-text-field>
       <v-text-field
-        v-model="confirmPassowrd"
+        v-model="userInfo.confirmPassowrd"
+        :rules="simpleRules"
         label="Confirme sua senha"
         type="password"
         required
       ></v-text-field>
-        <v-btn to="/dashboard/home" @click="submit()" class="btn__register"> Cadastro</v-btn >
+        <v-btn @click="submit()" class="btn__register"> Cadastro</v-btn >
     </v-form>
   </v-content>
 </template>
@@ -29,24 +44,39 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   data: () => ({
-    email: '',
-    confirmPassowrd: '',
-    user: {
+    userInfo: {
+      first_name: '',
+      last_name: '',
+      email_user: '',
+      confirmPassowrd: '',
+      logado: true,
       email: 'eve.holt@reqres.in',
       password: '',
-      // first_name: '',
-      // last_name: '',
-    }
+    },
+    simpleRules: [
+      v => !!v || 'Campo obrigatório',
+    ],
+    emailRules: [
+      v => !!v || 'Campo obrigatório',
+      v => /.+@.+\..+/.test(v) || 'Email inválido',
+    ],
   }),
   methods: {
     ...mapActions({
-       fazerLogin: 'REGISTER' 
+       makeRegister: 'REGISTER'
     }),
     submit() {
-      this.fazerLogin(this.user)
-      this.$router.push('dashboard/home')
+      if(this.userInfo.password === this.userInfo.confirmPassowrd ) {
+        this.makeRegister(this.userInfo)
+      } else {
+        alert("As senhas não são iguais")
+      }
     },
-
+  },
+  computed: {
+    ...mapState({
+      status: state => state.logado
+    })
   }
 }
 </script>

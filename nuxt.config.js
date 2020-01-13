@@ -31,7 +31,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    
+    { src: '~/plugins/vuex-persist', ssr: false },
+    { src: '~/plugins/vue-map', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -44,6 +45,7 @@ export default {
   */
   modules: [
     '@nuxtjs/axios',
+    'nuxt-fontawesome',
   ],
   axios: {
     // proxyHeaders: false
@@ -76,7 +78,8 @@ export default {
     /*
     ** You can extend webpack config here
     */
+    transpile: [/^vue2-google-maps($|\/)/],
     extend (config, ctx) {
     }
-  }
+  },
 }

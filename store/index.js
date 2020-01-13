@@ -5,53 +5,74 @@ export const state = () => ({
   last_name: '',
   avatar: '',
   token: '',
+  logado: false,
+  email_user: '',
+  password: ''
 })
 
 export const mutations = {
-  ADD_USER_DATA (state, { id, email, first_name, last_name, avatar}) {
+  ADD_USER_DATA (state, { id, email, first_name, last_name, avatar, logado, token, email_user, password}) {
     state.id = id
     state.email = email
     state.first_name = first_name
     state.last_name = last_name
     state.avatar = avatar
-  },
-  CREATE_USER(state, {id, token}) {
-    state.id = id
     state.token = token
+    state.logado = logado
+    state.email_user = email_user
+    state.password = password
   },
-  ADD_TOKEN(state, token) {
+  ADD_TOKEN (state, {token, logado}) {
     state.token = token
+    state.logado = logado
+  },
+  CHANGE_USER_DATA (state, { first_name, last_name, email_user, password}) {
+    state.first_name = first_name
+    state.last_name = last_name
+    state.email_user = email_user
+    state.password = password
   }
 }
 export const actions = {
-  USER_DATA ({ commit }) {
-    this.$axios.get('https://reqres.in/api/users/1')
-    .then(({data}) => {
-      console.log(data)
-      commit('ADD_USER_DATA', data.data)
-    })
-    .catch(error => {
-      console.log('deu ruim')
-    })
-  },
+  // USER_DATA ({ commit }) {
+  //   this.$axios.get('https://reqres.in/api/users/1')
+  //   .then(({data}) => {
+  //     console.log(data)
+  //     commit('ADD_USER_DATA', data.data)
+  //   })
+  //   .catch(error => {
+  //     alert(JSON.stringify(error.response.data.error))
+  //   })
+  // },
   REGISTER ({commit}, dados) {
-    this.$axios.post('https://reqres.in/api/register/', dados)
+  const resposta = {
+    email: dados.email,
+    password: dados.password
+  }
+  this.$axios.post('https://reqres.in/api/register/', resposta)
     .then(({data}) => {
-      console.log(data)
-      commit('CREATE_USER', data)
+      commit('ADD_USER_DATA', {...dados,...data})
+      this.$router.push('dashboard/home')
     })
     .catch(error => {
-      alert(error)
+      alert(JSON.stringify(error.response.data.error))
     })
   },
   LOGIN ({ commit }, dados) {
-    this.$axios.post('https://reqres.in/api/login', dados)
+    const dataUser = {
+      email: dados.email,
+      password: dados.password
+    }
+    this.$axios.post('https://reqres.in/api/login', dataUser)
     .then(({data}) => {
-      console.log(data)
-      commit('ADD_TOKEN', data )
+      commit('ADD_TOKEN', {...dados,...data})
+      this.$router.push('dashboard/home')
     })
     .catch(error => {
-      console.log(error)
+      alert(JSON.stringify(error.response.data.error))
     })
   },
+  UPDATE_USER({commit}, dados) {
+    commit('CHANGE_USER_DATA', dados)
+  }
 }

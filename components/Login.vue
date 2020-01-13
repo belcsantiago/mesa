@@ -3,7 +3,7 @@
     <p>Login</p>
     <v-form ref="form">
       <v-text-field
-        v-model="email"
+        v-model="user.email_user"
         label="E-mail"
         required
       ></v-text-field>
@@ -13,7 +13,7 @@
         type="password"
         required
       ></v-text-field>
-        <v-btn class="btn__confirm" @click="submit()">
+        <v-btn class="btn__confirm" @click="submitLogin()">
             Logar
           </v-btn >
     </v-form>
@@ -25,23 +25,31 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   data: () => ({
-    email: '',
     user: {
       email: 'eve.holt@reqres.in',
-      password: '',
-      // first_name: '',
-      // last_name: '',
-    }
+      password: null,
+      logado: true,
+      email_user: null,
+    },
+    credentials: null
   }),
   methods: {
     ...mapActions({
-       fazerLogin: 'LOGIN' 
+       makeLogin: 'LOGIN' 
     }),
-    submit() {
-      this.fazerLogin(this.user)
-      this.$router.push('dashboard/home')
+    verifyUser() {
+      if( this.user.email_user === this.$store.state.email_user & this.user.password === this.$store.state.password) {
+        this.credentials = true
+      }
     },
-
+    submitLogin() {
+      this.verifyUser()
+      if( this.credentials === true | this.user.email_user === this.user.email) {
+        this.makeLogin(this.user)
+      } else {
+        alert('E-mail não cadastrado ou senha inválida')
+      }
+    }
   }
 }
 </script>

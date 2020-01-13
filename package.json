@@ -12,9 +12,13 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.9.2",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "nuxt-fontawesome": "^0.4.0",
+    "vue2-google-maps": "^0.10.7",
+    "vuex-persist": "^2.2.0"
   },
   "devDependencies": {
+    "@mdi/font": "^4.7.95",
     "@nuxtjs/vuetify": "^1.0.0",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2"
