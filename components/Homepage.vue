@@ -1,33 +1,29 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col>
-        <div>
-          <h1>Olá, Bem-vindo {{ usuario }}</h1>
-        </div>
-      </v-col>
-      <v-col>
-        <div>
-          <h3 @click="openProfile">Perfil</h3>
-        </div>
-      </v-col>
-      <v-col>
-        <div>
-          <h3 @click="openMap">Maps</h3>
-        </div>
-      </v-col>
-      <v-col>
-        <div>
-          <h5 @click="logout">Logout</h5>
-        </div>
-      </v-col>
-    </v-row>
-    <v-card v-if="profile">
-      <Profile />
+    <v-card>
+        <v-card color="grey lighten-4" flat>
+          <v-toolbar>
+            <v-toolbar-title>Bem-vindo {{usuario}}</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-btn @click="openProfile" icon>
+              <v-icon>mdi-account</v-icon>
+            </v-btn>
+            <v-btn @click="openMap" icon>
+              <v-icon>mdi-google-maps</v-icon>
+            </v-btn>
+            <v-btn @click="logout" icon>
+              <v-icon>mdi-logout</v-icon>
+            </v-btn>
+          </v-toolbar>
+        </v-card>
     </v-card>
-    <v-card v-if="map">
-      <Maps />
-    </v-card>
+          <v-card v-if="profile" class="card">
+            <Profile />
+          </v-card>
+          <v-card v-if="map" class="card">
+                <Maps />
+          </v-card>
+    
   </v-container>
 </template>
 
@@ -80,4 +76,8 @@ h3:hover
   cursor context-menu
 h5:hover
   cursor context-menu
+.v-toolbar
+  background-color #ea9abb
+.card
+  margin-top 20px
 </style>

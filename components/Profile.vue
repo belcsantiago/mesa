@@ -82,7 +82,10 @@ export default {
 <style lang="stylus" scoped>
 .btn
   &__register
-    background-color #ea9abb!important
+    background-color #be8abf!important
 .content
   padding 20px
+
+.alterar
+  background-color #ea9abb!important
 </style>
