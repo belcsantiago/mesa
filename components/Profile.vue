@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <p>Registro</p>
+    <p>Perfil</p>
     <v-form ref="form">
       <v-text-field
         v-model="userInfo.first_name"

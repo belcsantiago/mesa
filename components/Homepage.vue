@@ -13,7 +13,7 @@
     </v-col>
     <v-col>
       <div>
-        <h3 @click="openProfile()"> Maps</h3>
+        <h3 @click="openMap()"> Maps</h3>
       </div>
     </v-col>
     <v-col>
@@ -25,6 +25,9 @@
   <v-card v-if="profile === true">
       <Profile />
    </v-card>
+   <v-card v-if="map === true">
+      <Maps />
+   </v-card>
 </v-container>
   
 </template>
@@ -33,10 +36,12 @@
 import { mapState } from 'vuex'
 export default {
   components: {
-    Profile: () => import("~/components/Profile.vue")
+    Profile: () => import("~/components/Profile.vue"),
+    Maps: () => import("~/components/Maps.vue")
   },
   data: () => ({
     profile:'',
+    map: ''
   }),
   computed: {
     ...mapState({
@@ -52,6 +57,11 @@ export default {
   methods: {
     openProfile() {
       this.profile = !this.profile
+      this.map = false
+    },
+    openMap() {
+      this.map = !this.map
+      this.profile = false
     },
     logout() {
       localStorage.removeItem('mesa');
@@ -60,3 +70,11 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+h3:hover
+  background-color #ea9abb
+  cursor context-menu
+h5:hover
+  cursor context-menu
+</style>

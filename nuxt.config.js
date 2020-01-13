@@ -2,6 +2,9 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
   mode: 'universal',
+  env: {
+    GOOGLE_KEY: process.env.GOOGLE_KEY
+  },
   /*
   ** Headers of the page
   */
@@ -46,6 +49,7 @@ export default {
   modules: [
     '@nuxtjs/axios',
     'nuxt-fontawesome',
+    ['@nuxtjs/dotenv', {filename: '.env'}],
   ],
   axios: {
     // proxyHeaders: false

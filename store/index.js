@@ -52,7 +52,7 @@ export const actions = {
   this.$axios.post('https://reqres.in/api/register/', resposta)
     .then(({data}) => {
       commit('ADD_USER_DATA', {...dados,...data})
-      this.$router.push('dashboard/home')
+      this.$router.push('/home')
     })
     .catch(error => {
       alert(JSON.stringify(error.response.data.error))
@@ -66,7 +66,7 @@ export const actions = {
     this.$axios.post('https://reqres.in/api/login', dataUser)
     .then(({data}) => {
       commit('ADD_TOKEN', {...dados,...data})
-      this.$router.push('dashboard/home')
+      this.$router.push('/home')
     })
     .catch(error => {
       alert(JSON.stringify(error.response.data.error))

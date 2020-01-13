@@ -1,6 +1,6 @@
 <template>
   <v-content>
-    <p>Registro</p>
+    <p>Cadastro</p>
     <v-form ref="form">
       <v-text-field
         v-model="userInfo.first_name"
@@ -84,7 +84,5 @@ export default {
 .btn
   &__register
     background-color #ea9abb!important
-  &__confirm
-    background-color #fea5ad!important
 
 </style>
