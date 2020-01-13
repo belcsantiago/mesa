@@ -8,17 +8,17 @@
       </v-col>
       <v-col>
         <div>
-          <h3 @click="openProfile()">Perfil</h3>
+          <h3 @click="openProfile">Perfil</h3>
         </div>
       </v-col>
       <v-col>
         <div>
-          <h3 @click="openMap()">Maps</h3>
+          <h3 @click="openMap">Maps</h3>
         </div>
       </v-col>
       <v-col>
         <div>
-          <h5 @click="logout()">Logout</h5>
+          <h5 @click="logout">Logout</h5>
         </div>
       </v-col>
     </v-row>

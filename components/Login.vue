@@ -13,45 +13,53 @@
         type="password"
         required
       ></v-text-field>
-        <v-btn class="btn__confirm" @click="submitLogin()">
-            Logar
-          </v-btn >
+      <v-btn class="btn__confirm" @click="submitLogin()">
+        Logar
+      </v-btn>
     </v-form>
   </v-content>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-
+import { mapState, mapActions } from "vuex";
 export default {
   data: () => ({
     user: {
-      email: 'eve.holt@reqres.in',
+      email: "eve.holt@reqres.in",
       password: null,
       logado: true,
-      email_user: null,
+      email_user: null
     },
     credentials: null
   }),
+  computed: {
+    ...mapState({
+      email: state => state.email_user,
+      password: state => state.password
+    })
+  },
   methods: {
     ...mapActions({
-       makeLogin: 'LOGIN' 
+      makeLogin: "LOGIN"
     }),
     verifyUser() {
-      if( this.user.email_user === this.$store.state.email_user & this.user.password === this.$store.state.password) {
-        this.credentials = true
+      if (
+        (this.user.email_user === this.email_user) &
+        (this.user.password === this.password)
+      ) {
+        this.credentials = true;
       }
     },
     submitLogin() {
-      this.verifyUser()
-      if( this.credentials === true | this.user.email_user === this.user.email) {
-        this.makeLogin(this.user)
+      this.verifyUser();
+      if (this.credentials || this.user.email_user === this.user.email) {
+        this.makeLogin(this.user);
       } else {
-        alert('E-mail não cadastrado ou senha inválida')
+        alert("E-mail não cadastrado ou senha inválida");
       }
     }
   }
-}
+};
 </script>
 <style lang="stylus" scoped>
 .btn
@@ -59,5 +67,4 @@ export default {
     background-color #ea9abb!important
   &__confirm
     background-color #fea5ad!important
-
 </style>

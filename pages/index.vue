@@ -1,12 +1,11 @@
 <template>
   <v-layout>
-    
     <v-row>
       <v-col>
-        <div v-if="showLogin === true" class="initial">
+        <div v-if="showLogin" class="initial">
           <Login />
         </div>
-        <div @click="showL()" v-else class="title-card">
+        <div @click="showL" v-else class="title-card">
           <p>Fazer login</p>
         </div>
       </v-col>
@@ -14,10 +13,10 @@
         <p class="title">Olá, você deseja:</p>
       </v-col>
       <v-col>
-        <div v-if="showRegister === true" class="initial">
+        <div v-if="showRegister" class="initial">
           <Register />
         </div>
-        <div @click="showR()" v-else class="title-card">
+        <div @click="showR" v-else class="title-card">
           <p>Fazer registro</p>
         </div>
       </v-col>
@@ -32,22 +31,21 @@ export default {
     Register: () => import("~/components/Register.vue")
   },
   data: () => ({
-    showLogin: '',
-    showRegister: ''
+    showLogin: "",
+    showRegister: ""
   }),
   methods: {
     showL() {
-      this.showLogin = !this.showLogin
+      this.showLogin = !this.showLogin;
     },
     showR() {
-      this.showRegister = !this.showRegister
+      this.showRegister = !this.showRegister;
     }
   }
-}
+};
 </script>
 
 <style lang="stylus" scoped>
-
 .initial
   margin auto
   background-color #be8abf
@@ -56,11 +54,9 @@ export default {
   border-radius 10px
   display flex
   text-align center
-  
 .title
   font-size 4em
   text-align: center
-
 .title-card
   margin auto
   background-color #be8abf
@@ -71,5 +67,4 @@ export default {
   text-align center
   justify-content center
   align-items center
-
 </style>
