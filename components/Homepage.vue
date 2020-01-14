@@ -5,13 +5,13 @@
           <v-toolbar>
             <v-toolbar-title>Bem-vindo {{usuario}}</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn @click="openProfile" icon>
+            <v-btn title="abrir/fechar perfil" @click="openProfile" icon>
               <v-icon>mdi-account</v-icon>
             </v-btn>
-            <v-btn @click="openMap" icon>
+            <v-btn title="abrir/fechar mapa" @click="openMap" icon>
               <v-icon>mdi-google-maps</v-icon>
             </v-btn>
-            <v-btn @click="logout" icon>
+            <v-btn title="sair" @click="logout" icon>
               <v-icon>mdi-logout</v-icon>
             </v-btn>
           </v-toolbar>
